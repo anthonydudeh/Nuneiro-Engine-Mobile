@@ -2864,7 +2864,8 @@ public function endSong()
 					StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
 
 					var weekAccuracy = FlxMath.bound(campaignSaveData.accPoints / campaignSaveData.totalNotesHit, 0, 1);
-					Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty, weekAccuracy, campaignMisses == 0);
+					var comboBreakCount = campaignSaveData.missed+campaignSaveData.bad+campaignSaveData.shit;
+					Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty, weekAccuracy, comboBreakCount == 0);
 
 					FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
 					FlxG.save.flush();
@@ -2914,7 +2915,8 @@ public function endSong()
 				var percent:Float = ratingPercent;
 				if (Math.isNaN(percent))
 					percent = 0;
-				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent, songMisses == 0);
+				var comboBreakCount = scoreData.missed+scoreData.bad+scoreData.shit;
+				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent, comboBreakCount == 0);
 			}
 			#end
 		}
@@ -2933,7 +2935,8 @@ function zoomIntoResultsScreen(isNewHighscore:Bool, scoreData:SaveScoreData, pre
 	if (!ClientPrefs.data.vsliceResults || botplay)
 	{
 		var resultingAccuracy = Math.min(1, scoreData.accPoints / scoreData.totalNotesHit);
-		var fpRank = Scoring.calculateRankFromData(scoreData.score, resultingAccuracy, scoreData.missed == 0) ?? SHIT;
+		var comboBreakCount = scoreData.missed+scoreData.bad+scoreData.shit;
+		var fpRank = Scoring.calculateRankFromData(scoreData.score, resultingAccuracy, comboBreakCount== 0) ?? SHIT;
 		if (isNewHighscore && !isStoryMode)
 		{
 			camOther.fade(FlxColor.BLACK, 0.6, false, () ->
@@ -3768,6 +3771,7 @@ public function goodNoteHit(note:Note):Void
 
 		if (!note.isSustainNote)
 		{
+			if(note.)
 			combo++;
 			maxCombo = FlxMath.maxInt(maxCombo, combo);
 			if (combo > 9999)
