@@ -2915,7 +2915,7 @@ public function endSong()
 				var percent:Float = ratingPercent;
 				if (Math.isNaN(percent))
 					percent = 0;
-				var comboBreakCount = scoreData.missed+scoreData.bad+scoreData.shit;
+				var comboBreakCount = tempActiveTallises.missed+tempActiveTallises.bad+tempActiveTallises.shit;
 				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent, comboBreakCount == 0);
 			}
 			#end
@@ -3137,6 +3137,8 @@ private function popUpScore(note:Note = null):Void
 
 	// tryna do MS based judgment due to popular demand
 	var daRating:Rating = Conductor.judgeNote(ratingsData, noteDiff / playbackRate);
+
+	if(daRating.name == "bad" || daRating.name == "shit") combo = 0; //V-Slice combo thingy
 
 	totalNotesHit += daRating.ratingMod;
 	note.ratingMod = daRating.ratingMod;
@@ -3771,7 +3773,6 @@ public function goodNoteHit(note:Note):Void
 
 		if (!note.isSustainNote)
 		{
-			if(note.)
 			combo++;
 			maxCombo = FlxMath.maxInt(maxCombo, combo);
 			if (combo > 9999)

@@ -1,5 +1,6 @@
 package backend;
 
+import mikolka.vslice.components.crash.CrashServer;
 import openfl.utils.Assets;
 import haxe.Json;
 
@@ -44,6 +45,7 @@ class Mods
 			var pack:Dynamic = getPack(mod);
 			if(pack != null && pack.runsGlobally) globalMods.push(mod);
 		}
+		CrashServer.updateGlobalMods(globalMods);
 		return globalMods;
 	}
 

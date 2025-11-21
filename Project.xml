@@ -7,13 +7,13 @@
 
 	<app unless="PROFILE_BUILD || mobile" title="Friday Night Funkin': P-Slice Engine"
 		file="PSliceEngine" packageName="com.mikolka9144.pslice" package="com.mikolka9144.pslice"
-		main="Main" version="3.4.1" company="mikolka9144" />
+		main="Main" version="3.4.2" company="mikolka9144" />
 	<app if="PROFILE_BUILD" title="P-Slice Engine Profiling build" file="PSliceEngine"
 		packageName="com.mikolka9144.testPslice" package="com.mikolka9144.testPslice" main="Main"
-		version="3.4.1" company="mikolka9144" />
+		version="3.4.2" company="mikolka9144" />
 	<app if="mobile" unless="PROFILE_BUILD" title="P-Slice Engine" file="PSliceEngine"
 		packageName="com.mikolka9144.pslice" package="com.mikolka9144.pslice" main="Main"
-		version="3.4.1" company="mikolka9144" />
+		version="3.4.2" company="mikolka9144" />
 	<!--Switch
 	Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -181,7 +181,7 @@
 		<assets path="assets/secrets" rename="assets/shared" exclude="*.ogg" if="web" />
 		<assets path="assets/secrets" rename="assets/shared" unless="web" />
 	</section>
-
+>
 	<section if="TRANSLATIONS_ALLOWED">
 		<assets path="assets/translations" rename="assets" exclude="*.ogg" if="web" />
 		<assets path="assets/translations" rename="assets" unless="web" />
@@ -229,7 +229,9 @@
 	<haxelib name="extension-haptics" if="mobile" />
 	<haxelib name="extension-androidtools" if="android" />
 	<section if="FIREBASE_CRASH_HANDLER">
-		<haxelib name="firebase" />
+		<haxelib name="extension-firebase-crashlytics" />
+		<config:android pslice-firebase-sdk-path="yes" />
+		<define name="NO_FIREBASE_ANDROID_PATCHES" />
 	</section>
 	<haxelib name="tjson" version="1.4.0" />
 	<haxelib name="grig.audio" />
