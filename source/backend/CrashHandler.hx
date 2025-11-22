@@ -36,11 +36,11 @@ class CrashHandler
 	{
 		var errorStack = CallStack.exceptionStack(true);
 		#if FIREBASE_CRASH_HANDLER
+		CrashServer.onCrash();
         Crashlytics.sendCrashData(e.error,errorStack);
         #end
 		var crash = UserErrorSubstate.collectErrorData(e.error,errorStack);
 		var crashState = new CrashState(crash);
-		CrashServer.onCrash();
 		e.preventDefault();
 		FlxG.switchState(crashState);
 	}

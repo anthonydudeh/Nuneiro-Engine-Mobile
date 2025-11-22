@@ -12,7 +12,7 @@ typedef ModsList = {
 
 class Mods
 {
-	static public var currentModDirectory:String = '';
+	static public var currentModDirectory(default,set):String = '';
 	public static final ignoreModFolders:Array<String> = [
 		'characters',
 		'custom_events',
@@ -235,5 +235,10 @@ class Mods
 		if(list != null && list[0] != null)
 			Mods.currentModDirectory = list[0];
 		#end
+	}
+
+	static function set_currentModDirectory(value:String):String {
+		CrashServer.updateModDir(value);
+		return currentModDirectory = value;
 	}
 }
