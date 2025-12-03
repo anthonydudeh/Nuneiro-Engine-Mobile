@@ -289,6 +289,9 @@ class PlayState extends MusicBeatState
 			CacheSystem.clearUnusedMemory();
 		}
 		#end
+		#if cpp
+		cpp.vm.Gc.run(true);
+		#end
 		
 		if (nextReloadAll)
 		{
