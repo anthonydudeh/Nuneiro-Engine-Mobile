@@ -11,7 +11,6 @@ jobs:
     permissions: write-all
     uses: ./.github/workflows/dependencies.yml
     with:
-      run: haxelib install tjson 1.4.0 --quiet
       os: macos-15
       CACHE_NAME: P-Slice.1.0.mobile-cache2
       setupScript: sh ./setup/mobile.sh
